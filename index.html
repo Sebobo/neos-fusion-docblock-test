@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fusion DocBock Tester</title>
+        <link rel="stylesheet" href="dist/app.css" />
+    </head>
+    <body>
+        <div class="container mx-auto px-4 flex flex-col gap-4">
+            <h1 class="text-3xl font-bold underline">
+                The Neos CMS Fusion DocBlock parser tester
+            </h1>
+            <h2 class="text-lg font-bold">Input</h2>
+            <textarea rows="10" class="w-full rounded border p-4" id="input">
+/**
+ * A component to test some stuff
+ *
+ * It can really do crazy stuff
+ *
+ * @example <caption>Example usage of My.Test:Component.Test</caption>
+ * renderer = My.Test:Component.Test {
+ *     myVar = 'Hello world'
+ * }
+ *
+ * @presentation
+ * @public
+ * @param {string} myVar A prop for testing
+ * @returns {string}
+ */
+prototype(My.Test:Component.Test) < prototype(Neos.Fusion:Component) {
+    myVar = 'test'
+
+	# We need foo for something
+	foo = ${this.myVar + ' me'}
+
+    /**
+	 * The renderer
+     *
+     * It displays `myVar` inside a div
+     *
+     * @private
+	 */
+	renderer = afx`
+		<div>foo {props.myVar}</div>
+	`
+}
+            </textarea>
+
+            <h2 class="text-lg font-bold">Parsed docblocks</h2>
+            <textarea readonly id="output" class="w-full rounded border p-4" rows="10"></textarea>
+
+            <h2 class="text-lg font-bold">Result</h2>
+            <div id="example">
+                Loading...
+            </div>
+        </div>
+        <script type="module" src="dist/app.js"></script>
+    </body>
+</html>
